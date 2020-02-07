@@ -1,16 +1,58 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import locales from '@angular/common/locales/es-AR';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { APP_ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { NgForComponent } from './ng-for/ng-for.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
+import { HomeComponent } from './home/home/home.component';
+import { FormComponent } from './components/cliente/form.component';
+import { ClienteService } from './services/cliente.service';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { DetalleComponent } from './components/cliente/detalle/detalle.component';
+import { LoginComponent } from './components/usuarios/login.component';
+
+registerLocaleData(locales, 'es-AR');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    NgForComponent,
+    ClienteComponent,
+    HomeComponent,
+    FormComponent,
+    PaginatorComponent,
+    DetalleComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    APP_ROUTES,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
-  providers: [],
+  providers: [
+    ClienteService,
+    {
+      provide: LOCALE_ID, useValue: 'es-AR'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

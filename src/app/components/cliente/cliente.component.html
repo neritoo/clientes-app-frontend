@@ -1,0 +1,49 @@
+<detalle-cliente *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></detalle-cliente>
+
+<div class="card border-primary mb-5 mt-5">
+    <div class="card-header">Clientes</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Listado de clientes</h5>
+
+        <div class="my-2 text-left">
+            <button class="btn rounded btn-primary" [routerLink]="['/clientes/form']">Crear cliente</button>
+        </div>
+
+        <div *ngIf="clientes?.length == 0" class="alert alert-info">
+            No hay registros en la base de datos.
+        </div>
+
+        <table class="table table-bordered table-striped text-primary" *ngIf="clientes?.length > 0">
+            <thead>
+                <tr>
+                    <th>Perfil</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Fecha</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>
+                        <img id="imagenPequeña" (click)="abrirModal(cliente)" class="img-fluid img-thumbnail img" *ngIf="cliente?.foto" src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="...">
+                        <img id="imagenPequeña" (click)="abrirModal(cliente)" class="img-fluid img-thumbnail img" *ngIf="!cliente?.foto" src="http://localhost:8080/images/not_user.png" alt="...">
+                    </td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellido }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.createdAt | date:"EEEE dd, MMMM yyyy" }}</td>
+                    <td class="text-center">
+                        <button [routerLink]="['/clientes/form', cliente.id]" type="button" class="btn btn-primary m-1">Editar</button>
+                    </td>
+                    <td class="text-center">
+                        <button (click)="delete(cliente)" type="button" class="btn btn-danger m-1">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
+    </div>
+</div>

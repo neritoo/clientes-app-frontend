@@ -1,0 +1,12 @@
+<button (click)="ocultado = !ocultado" class="btn btn-primary m-3">{{ ocultado? 'Mostrar': 'Ocultar' }}</button>
+
+<div class="card">
+    <div class="card-header">
+        Listado de cursos
+    </div>
+    <ul *ngIf="!ocultado" class="list-group">
+        <li *ngFor="let curso of cursos" class="list-group-item">
+            {{ curso }}
+        </li>
+    </ul>
+</div>

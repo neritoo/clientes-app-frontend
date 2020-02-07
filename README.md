@@ -1,27 +1,15 @@
 # ClientesApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
+Proyecto desarrollado con el framework de JavaScript 'Angular', aplicación que corre por el lado del cliente para el sistema básico "ClientesApp" que se utilizó para el aprendizaje del curso Spring 5 - Angular.
 
-## Development server
+## Descripción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+La aplicación Web fue creada con el objetivo de poder hacer un CRUD de los clientes que formarán parte de una base de datos que sirve como ejemplo.
 
-## Code scaffolding
+Los datos de los clientes son: apellido, nombre, email, fecha de creación, región y opcionalmente una foto que los represente. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para la creación de clientes por el lado del servidor, utilizando Spring 5 (Spring boot y security), se crearon las siguientes entidades: clientes y regiones, con una relación de uno a muchos, clientes -> regiones.
 
-## Build
+Para la persistencia se utilizó JPA y Hibernate, y la base de datos relacional MySql.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Para manejar la autenticación se utilizó Spring Security y OAuth2, aprendiendo a utilizar el manejo de tokens, que son necesarios a la hora de llevar a cabo la autenticación de sesiones sin estado (stateless).

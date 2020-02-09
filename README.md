@@ -13,3 +13,7 @@ Para la creación de clientes por el lado del servidor, utilizando Spring 5 (Spr
 Para la persistencia se utilizó JPA y Hibernate, y la base de datos relacional MySql.
 
 Para manejar la autenticación se utilizó Spring Security y OAuth2, aprendiendo a utilizar el manejo de tokens, que son necesarios a la hora de llevar a cabo la autenticación de sesiones sin estado (stateless).
+
+## Avances
+
+null

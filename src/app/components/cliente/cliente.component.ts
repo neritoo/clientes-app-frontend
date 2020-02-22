@@ -6,6 +6,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 
 import swal from 'sweetalert2';
 import { ModalService } from './detalle/modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-cliente',
@@ -30,7 +31,8 @@ export class ClienteComponent implements OnInit {
   constructor(
     private clienteService: ClienteService,
     private activatedRoute: ActivatedRoute,
-    private modalService: ModalService ) { }
+    private modalService: ModalService,
+    private authService: AuthService ) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe( params => {
@@ -85,5 +87,9 @@ export class ClienteComponent implements OnInit {
   abrirModal( cliente: Cliente ){
     this.clienteSeleccionado = cliente;
     this.modalService.abrirModal();
+  }
+
+  hasRole(role: string): boolean{
+    return this.authService.hasRole(role);
   }
 }

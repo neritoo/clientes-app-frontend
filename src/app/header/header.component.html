@@ -13,6 +13,15 @@
         </ul>
     </div>
     <ul class="navbar-nav navbar-right">
-        <li><a [routerLink]="['login']" class="btn btn-outline-primary" type="button">Sign In</a></li>
+        <li *ngIf="!estaAuth()"><a [routerLink]="['login']" class="btn btn-outline-primary" type="button">Sign In</a></li>
+        <li *ngIf="estaAuth()" class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{getUsuario().username}}
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <button (click)="logout()" class="dropdown-item" type="submit">Log Out</button>
+            </div>
+        </li>
     </ul>
 </nav>

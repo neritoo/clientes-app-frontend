@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,17 +14,29 @@ export class LoginComponent implements OnInit {
   usuario: Usuario;
   recordarme: boolean;
 
-  constructor( private router: Router ) { }
+  constructor( private authService: AuthService, private router: Router ) {
+    this.usuario = new Usuario();
+  }
 
   ngOnInit() {
-    this.usuario = new Usuario();
+    if(this.authService.isAuthenticated()){
+      Swal.fire({
+        icon: 'info',
+        title: 'Login',
+        text: `Hola ${this.authService.usuario.username} ya estas autenticado!`
+      });
+      this.router.navigate(['/clientes']);
+    }
+
     if ( localStorage.getItem('email') ){
       this.usuario.username = localStorage.getItem('username');
       this.recordarme = true;
     }
+    
   }
 
   logIn( form: NgForm ){
+    console.log(this.usuario);
     if ( form.invalid ){
       return;
     }
@@ -35,9 +48,29 @@ export class LoginComponent implements OnInit {
     });
     Swal.showLoading();
     
-    this.router.navigateByUrl("/home");
+    this.authService.login(this.usuario).subscribe(res => {
+   
+      Swal.close();
 
-    Swal.close();
+      this.authService.guardarUsuario(res.access_token);
+      this.authService.guardarToken(res.access_token);
+
+      let usuario = this.authService.usuario;
+      this.router.navigateByUrl("/clientes");
+      Swal.fire({
+        icon: 'success',
+        title: 'Login',
+        text: `Bienvenido ${usuario.username}, has iniciado sesión!`
+      })
+    }, err => {
+       if(err.status == 400){
+         Swal.fire({
+           icon: 'error',
+           title: 'Error al autenticarse',
+           text: 'Usuario o clave incorrectas'
+         });
+       }
+    });    
   }
 
 }

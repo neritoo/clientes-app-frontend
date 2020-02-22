@@ -153,6 +153,11 @@ export class ClienteService {
 
   private isNoAutorizado(e): boolean {
     if (e.status == 401){
+      //Si el token expira (y nos devuelve codigo 401) y estamos auth,
+      //tenemos que cerrar sesión por lado del cliente también.
+      if(this.authService.isAuthenticated()){
+        this.authService.logout();
+      }
       this.router.navigate(['/login']);
       return true;
     }

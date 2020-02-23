@@ -28,15 +28,14 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/clientes']);
     }
 
-    if ( localStorage.getItem('email') ){
-      this.usuario.username = localStorage.getItem('username');
+    if ( sessionStorage.getItem('user_name') ){
+      this.usuario.username = localStorage.getItem('user_name');
       this.recordarme = true;
     }
     
   }
 
   logIn( form: NgForm ){
-    console.log(this.usuario);
     if ( form.invalid ){
       return;
     }
@@ -56,12 +55,19 @@ export class LoginComponent implements OnInit {
       this.authService.guardarToken(res.access_token);
 
       let usuario = this.authService.usuario;
+
+      if(this.recordarme){
+        sessionStorage.setItem('user_name', this.usuario.username);
+      } else {
+        sessionStorage.removeItem('user_name');
+      }
+      
       this.router.navigateByUrl("/clientes");
       Swal.fire({
         icon: 'success',
         title: 'Login',
         text: `Bienvenido ${usuario.username}, has iniciado sesión!`
-      })
+      });
     }, err => {
        if(err.status == 400){
          Swal.fire({
@@ -72,5 +78,7 @@ export class LoginComponent implements OnInit {
        }
     });    
   }
+
+
 
 }

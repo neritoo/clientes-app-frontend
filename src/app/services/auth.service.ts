@@ -52,7 +52,8 @@ export class AuthService {
     this._token = null;
     this._usuario = null;
 
-    sessionStorage.clear();
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
   }
 
   guardarUsuario(accessToken: string){

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import locales from '@angular/common/locales/es-AR';
@@ -22,6 +22,10 @@ import { ClienteService } from './services/cliente.service';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { DetalleComponent } from './components/cliente/detalle/detalle.component';
 import { LoginComponent } from './components/usuarios/login.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
+
 
 registerLocaleData(locales, 'es-AR');
 
@@ -49,9 +53,9 @@ registerLocaleData(locales, 'es-AR');
   ],
   providers: [
     ClienteService,
-    {
-      provide: LOCALE_ID, useValue: 'es-AR'
-    }
+    { provide: LOCALE_ID, useValue: 'es-AR' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

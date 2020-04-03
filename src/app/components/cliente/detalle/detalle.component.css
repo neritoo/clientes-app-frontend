@@ -1,13 +1,24 @@
-img {
-    display: block;
+.modal-body::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #0275d8;
+}
+
+.img {
+    display: fixed;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 250px;
     max-height: 400px;
-    min-width: 64px;
-    min-height: 64px;
-    border-radius: 10%;
-    object-fit: cover;
+    min-width: 75px;
+    height: 250px !important;
+    border-radius: 5%;
 }
 
 .abrir-modal {
@@ -20,11 +31,25 @@ img {
     z-index: 1000;
 }
 
+.modal-dialog {
+    overflow-y: initial !important;
+}
+
+.modal-body {
+    height: 400px;
+    overflow-y: auto;
+}
+
 .animation {
     animation-duration: 0.7s;
     animation-fill-mode: both;
     -webkit-animation-duration: 0.7s;
     -webkit-animation-animation-fill-mode: both;
+}
+
+.modal-lg {
+    max-width: 50% !important;
+    font-size: 90%;
 }
 
 .fadeIn {

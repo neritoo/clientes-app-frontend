@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 
 })
 export class HeaderComponent {
-    title: string = 'Roziito App';
+    title: string = 'Clientes App';
     usuario: Usuario;
 
     constructor(private authService: AuthService, private router: Router){

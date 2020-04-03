@@ -1,0 +1,65 @@
+<div class="card bg-light my-3" *ngIf="factura">
+    <div class="card-header text-center">
+        <h3>{{titulo}}: <small>{{factura.descripcion}}</small></h3>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">
+            <a [routerLink]="['/clientes']" class="btn btn-primary btn-xs">&laquo; Volver</a>
+        </h4>
+
+        <ul class="list-group my-2">
+            <li class="list-group-item list-group-item-primary">
+                <h5>Datos del cliente</h5>
+            </li>
+            <li class="list-group-item">{{factura.cliente.nombre}}</li>
+            <li class="list-group-item">{{factura.cliente.apellido}}</li>
+        </ul>
+
+        <ul class="list-group my-2">
+            <li class="list-group-item list-group-item-primary">
+                <h5>Datos de la factura</h5>
+            </li>
+            <li class="list-group-item">Id: {{factura.id}}</li>
+            <li class="list-group-item">Decripción: {{factura.descripcion}}</li>
+            <li class="list-group-item">Fecha: {{factura.fechaCreacion | date}}</li>
+        </ul>
+
+        <table class="table table-striped table-hover table-bordered my-3">
+            <thead>
+                <tr>
+                    <th>
+                        <h5>Producto</h5>
+                    </th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let detalle of factura.detalles">
+                    <td>{{detalle.producto.nombre}}</td>
+                    <td>{{detalle.producto.precio | currency:'ARS':'symbol':'3.2-2':'es-AR'}}</td>
+                    <td>{{detalle.cantidad}}</td>
+                    <td>{{detalle.importe | currency:'ARS':'symbol':'3.2-2':'es-AR'}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="card border-info my-3">
+            <div class="card-header">
+                <h5>Observaciones</h5>
+            </div>
+            <div class="card-body">
+                <p *ngIf="!factura.observacion">Sin observaciones</p>
+                <p *ngIf="factura.observacion">{{factura.observacion}}</p>
+            </div>
+        </div>
+
+        <h5 class="float-left">
+            <span>
+                Total: 
+            </span>
+            <span class="badge badge-success">{{factura.total | currency:'ARS':'symbol':'3.2-2':'es-AR'}}</span>
+        </h5>
+    </div>
+</div>

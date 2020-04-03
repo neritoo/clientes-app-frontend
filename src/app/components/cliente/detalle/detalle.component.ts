@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
 import { ModalService } from './modal.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Factura } from 'src/app/models/factura';
+import { FacturaService } from 'src/app/services/factura.service';
 
 @Component({
   selector: 'detalle-cliente',
@@ -21,7 +23,8 @@ export class DetalleComponent implements OnInit {
 
   constructor( private clienteService: ClienteService,
     public modalService: ModalService,
-    private authService: AuthService ) { }
+    private authService: AuthService,
+    private facturaService: FacturaService ) { }
 
   ngOnInit() {
     
@@ -77,5 +80,31 @@ export class DetalleComponent implements OnInit {
 
   hasRole(role: string): boolean{
     return this.authService.hasRole(role);
+  }
+
+  delete( factura: Factura){
+    Swal.fire({
+      icon: 'warning',
+      title: 'Eliminar Cliente',
+      text: `¿Seguro que desea eliminar la factura ${factura.descripcion}?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then( (res ) => {
+      if (res.value) {
+        this.facturaService.delete(factura.id).subscribe(
+          res => {
+            this.cliente.facturas = this.cliente.facturas.filter(f => f !== factura);
+            Swal.fire({
+              icon: 'success',
+              title: "Factura Eliminada",
+              text: `Factura ${factura.descripcion} eliminada con éxito.`
+            })
+          }
+        )
+      }
+    })
   }
 }

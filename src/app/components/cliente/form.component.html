@@ -17,9 +17,9 @@
                 <div class="col-sm-6">
                     <div class="text-danger animated fadeInRight" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
                         <span class="animated fadeIn" *ngIf="nombre.errors.required">Nombre requerido</span>
-                        <span class="animated fadeIn" *ngIf="nombre.errors.minlength">El nombre debe tener al menos 4 caracteres</span>
+                        <span class="animated fadeIn" *ngIf="nombre.errors.minlength">El nombre debe tener al menos 3 caracteres</span>
                     </div>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" required minlength="4" #nombre="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" required minlength="3" #nombre="ngModel">
                 </div>
             </div>
 

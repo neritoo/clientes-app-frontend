@@ -1,6 +1,6 @@
 <detalle-cliente *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></detalle-cliente>
 
-<div class="card border-primary mb-5 mt-5">
+<div class="card border-primary mb-3 mt-3">
     <div class="card-header">Clientes</div>
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de clientes</h5>
@@ -23,18 +23,22 @@
                     <th>Fecha</th>
                     <th *ngIf="hasRole('ROLE_ADMIN')"></th>
                     <th *ngIf="hasRole('ROLE_ADMIN')"></th>
+                    <th *ngIf="hasRole('ROLE_ADMIN')"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let cliente of clientes">
                     <td *ngIf="hasRole('ROLE_USER')">
-                        <img id="imagenPequeña" (click)="abrirModal(cliente)" class="img-fluid img-thumbnail img" *ngIf="cliente?.foto" src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="...">
-                        <img id="imagenPequeña" (click)="abrirModal(cliente)" class="img-fluid img-thumbnail img" *ngIf="!cliente?.foto" src="http://localhost:8080/images/not_user.png" alt="...">
+                        <img id="imagenPequeña" (click)="abrirModal(cliente)" class="img-thumbnail" *ngIf="cliente?.foto" src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="...">
+                        <img id="imagenPequeña" (click)="abrirModal(cliente)" class="img-thumbnail" *ngIf="!cliente?.foto" src="http://localhost:8080/images/not_user.png" alt="...">
                     </td>
                     <td>{{ cliente.nombre }}</td>
                     <td>{{ cliente.apellido }}</td>
                     <td>{{ cliente.email }}</td>
                     <td>{{ cliente.createdAt | date:"EEEE dd, MMMM yyyy" }}</td>
+                    <td *ngIf="hasRole('ROLE_ADMIN')">
+                        <button [routerLink]="['/facturas/form', cliente.id]" type="button" class="btn btn-success m-1">Crear factura</button>
+                    </td>
                     <td *ngIf="hasRole('ROLE_ADMIN')" class="text-center">
                         <button *ngIf="hasRole('ROLE_ADMIN')" [routerLink]="['/clientes/form', cliente.id]" type="button" class="btn btn-primary m-1">Editar</button>
                     </td>

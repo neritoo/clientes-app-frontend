@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
     }
 
     if ( sessionStorage.getItem('user_name') ){
-      this.usuario.username = localStorage.getItem('user_name');
+      this.usuario.username = sessionStorage.getItem('user_name');
       this.recordarme = true;
     }
-    
+
   }
 
   logIn( form: NgForm ){

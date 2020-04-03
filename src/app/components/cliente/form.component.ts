@@ -62,6 +62,8 @@ export class FormComponent implements OnInit {
 
   update(){
     this.waitAlert();
+
+    this.cliente.facturas = null;
     this.clienteService.update(this.cliente).subscribe(
       cli => {
         this.router.navigate(['/clientes']);
@@ -78,6 +80,7 @@ export class FormComponent implements OnInit {
       }
     );
   }
+
   waitAlert(){
     Swal.fire({
       allowOutsideClick: false,

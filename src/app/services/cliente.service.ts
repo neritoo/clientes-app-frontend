@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Region } from '../models/region';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 
 
 
@@ -18,7 +19,7 @@ import Swal from 'sweetalert2';
 })
 export class ClienteService {
 
-  private url: string = "http://localhost:8080/api/clientes";
+  private url: string = URL_BACKEND + "/api/clientes";
 
   constructor( private http: HttpClient, private router: Router ) { }
 

@@ -39,8 +39,8 @@
                             </div>
 
                             <div class="col-sm">
-                                <img class="img-thumbnail img" *ngIf="cliente?.foto" src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="...">
-                                <img class="img-thumbnail img" *ngIf="!cliente?.foto" src="http://localhost:8080/images/not_user.png" alt="...">
+                                <img class="img-thumbnail img" *ngIf="cliente?.foto" src="{{urlBackend}}/api/uploads/img/{{cliente.foto}}" alt="...">
+                                <img class="img-thumbnail img" *ngIf="!cliente?.foto" src="{{urlBackend}}/images/not_user.png" alt="...">
                             </div>
                         </div>
                         <div class="row" *ngIf="hasRole('ROLE_ADMIN')">

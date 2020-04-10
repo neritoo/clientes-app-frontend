@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Cliente } from '../../models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { URL_BACKEND } from '../../config/config';
 
 import swal from 'sweetalert2';
 import { ModalService } from './detalle/modal.service';
@@ -27,6 +28,7 @@ export class ClienteComponent implements OnInit {
   clientes: Cliente[];
   paginador: any;
   clienteSeleccionado: Cliente;
+  urlBackend: string = URL_BACKEND;
 
   constructor(
     private clienteService: ClienteService,

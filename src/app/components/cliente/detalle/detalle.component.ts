@@ -7,6 +7,7 @@ import { ModalService } from './modal.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Factura } from 'src/app/models/factura';
 import { FacturaService } from 'src/app/services/factura.service';
+import { URL_BACKEND } from 'src/app/config/config';
 
 @Component({
   selector: 'detalle-cliente',
@@ -20,6 +21,7 @@ export class DetalleComponent implements OnInit {
   titulo: string = "Detalle del cliente";
   fotoSeleccionada: File;
   progreso: number = 0;
+  urlBackend: string = URL_BACKEND
 
   constructor( private clienteService: ClienteService,
     public modalService: ModalService,
